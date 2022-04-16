@@ -1,21 +1,22 @@
 # VBS Tester Ver.1.0.１
 
 ## 概要
-このスクリプトは、VBScriptの自動単体テストを行うためのVBScriptです。
-テストしたいVBScriptモジュールのテストケースを作成し、VbsTester.vbsと同一ディレクトリに格納したら、VbsTester.vbsを実行します。テスト結果は、Microsoft Outlookにて、指定のアドレスにメール送信します。
+このスクリプトは、VBScriptの自動単体テストを行うためのVBScriptです。  
+テストしたいVBScriptモジュールのテストケースを作成し、VbsTester.vbsと同一ディレクトリに格納したら、VbsTester.vbsを実行します。  
+テスト結果は、Microsoft Outlookにて、指定のアドレスにメール送信します。
 
 ## 使い方
-まずは、Address.iniをテキストエディタで開きます。
-このファイルには、テスト結果を送信したいメールアドレスを登録します。
-登録は、つぎのようにメールアドレスを1行ずつ入力します。
-
-  mail_address1@gmail.com
-  mail_address2@gmail.com
-  mail_address3@gmail.com
-
-VbsTester.vbsは、Microsoft Outlookによるメール送信機能を持っています。
-もし、この機能が不要であれば、VbsTester.vbsを修正する必要があります。
-網がけされている部分を、削除もしくはコメントアウトしてください。
+まずは、Address.iniをテキストエディタで開きます。  
+このファイルには、テスト結果を送信したいメールアドレスを登録します。  
+登録は、つぎのようにメールアドレスを1行ずつ入力します。  
+  
+  mail_address1@gmail.com  
+  mail_address2@gmail.com  
+  mail_address3@gmail.com  
+  
+VbsTester.vbsは、Microsoft Outlookによるメール送信機能を持っています。  
+もし、この機能が不要であれば、VbsTester.vbsを修正する必要があります。  
+網がけされている部分を、削除もしくはコメントアウトしてください。  
 
 
     Option Explicit
@@ -116,9 +117,9 @@ VbsTester.vbsは、Microsoft Outlookによるメール送信機能を持って�
         End Sub
     End Class
 
-この修正を行うと、VbsTester.vbsと同じディレクトリに、VbsTester.logというテキストファイルでテスト結果を出力します。
-次に、テストケースを作成します。
-テストケースは、拡張子”.inc”ファイルです。
+この修正を行うと、VbsTester.vbsと同じディレクトリに、VbsTester.logというテキストファイルでテスト結果を出力します。  
+次に、テストケースを作成します。  
+テストケースは、拡張子”.inc”ファイルです。  
 
     Option Explicit
 
@@ -171,29 +172,29 @@ ExecuteTestメソッドないの1行目で、テストしたいVBSモジュー�
 
     Extension: 「VBSモジュールのパス」
 
-次に、VBSモジュールないのメソッドのテストケースを記述します。
-テストケースは、Testメソッドで記述します。
-Testメソッドは、次のように指定します。
+次に、VBSモジュールないのメソッドのテストケースを記述します。  
+テストケースは、Testメソッドで記述します。  
+Testメソッドは、次のように指定します。  
 
     Test(TestCase, TestCaseName)
 
     TestCase:テストケース
     TestCaseName:テストケース名
 
-Testメソッドは、パラメータに指定されたテストケースが真となるように記述します。
-このサンプルをみると、sample_sourceフォルダにSample1.vbsというVBSがあります。このVBSには、Calc1というメソッドがあります。Calc1は、パラメータに指定された2つの値を加算します。
-ExecuteTestメソッドないのテストケースでは、
+Testメソッドは、パラメータに指定されたテストケースが真となるように記述します。  
+このサンプルをみると、sample_sourceフォルダにSample1.vbsというVBSがあります。このVBSには、Calc1というメソッドがあります。Calc1は、パラメータに指定された2つの値を加算します。  
+ExecuteTestメソッドないのテストケースでは、  
 
         Call Test(Calc1(1, 2) = 3, "Calc1")
         Call Test(Calc1(3, 4) = 7, "Calc1")
         Call Test(Calc1(5, 6) = 7, "Calc1")
 
-となっていますので、1行目は「１＋２＝３」で真、２行目も「３＋４＝７」で真ですが、３行目は「５＋６＝７」となっていますので、偽です。
-（テストケースが正しいのなら、Calc1メソッドは、「１＋２＝３」「３＋４＝７」「５＋６＝７」となるメソッドでなくてはならない!!）
-また、VbsTester.vbsと同じディレクトリにある、拡張子”.inc”ファイルに記述されているテストケースすべてが、テストの対象となります。
-このサンプルでは、「TestSample1.inc」と「TesSample2.inc」がテストファイルです。
-このテストファイルに記述されているテストケースが、VbsTester.vbsの実行によってテストされます。
-テスト結果は、Microsoft Outlookにてメールで指定のアドレスに送信されます。
+となっていますので、1行目は「１＋２＝３」で真、２行目も「３＋４＝７」で真ですが、３行目は「５＋６＝７」となっていますので、偽です。  
+（テストケースが正しいのなら、Calc1メソッドは、「１＋２＝３」「３＋４＝７」「５＋６＝７」となるメソッドでなくてはならない!!）  
+また、VbsTester.vbsと同じディレクトリにある、拡張子”.inc”ファイルに記述されているテストケースすべてが、テストの対象となります。  
+このサンプルでは、「TestSample1.inc」と「TesSample2.inc」がテストファイルです。  
+このテストファイルに記述されているテストケースが、VbsTester.vbsの実行によってテストされます。  
+テスト結果は、Microsoft Outlookにてメールで指定のアドレスに送信されます。  
 
     件名: From VbsTester
     本文:
